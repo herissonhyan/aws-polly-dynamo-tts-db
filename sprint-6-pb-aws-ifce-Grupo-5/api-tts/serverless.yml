@@ -1,0 +1,50 @@
+service: api-tts
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: python3.9
+
+functions:
+  health:
+    handler: handler.health
+    events:
+      - httpApi:
+          path: /
+          method: get
+  v1Description:
+    handler: handler.v1_description
+    events:
+      - httpApi:
+          path: /v1
+          method: get
+  v2Description:
+    handler: handler.v2_description
+    events:
+      - httpApi:
+          path: /v2
+          method: get
+  v1_tts:
+    handler: routes/rota1.v1_tts
+    events:
+      - http:
+          path: v1/tts
+          method: post
+  v2_tts:
+    handler: routes/rota2.v2_tts
+    events:
+      - http:
+          path: v2/tts
+          method: post
+  v3_tts:
+    handler: routes/rota3.v3_tts
+    events:
+      - http:
+          path: v3/tts
+          method: post
+  options:
+    handler: routes/options.tts_opt
+    events:
+      - http:
+          path: /options
+          method: get
