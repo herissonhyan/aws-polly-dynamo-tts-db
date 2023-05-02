@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>options</title>
+    <style>
+        .div-quadrada {
+            width: 200px;
+            height: 200px;
+            display: inline-block;
+            border: 1px solid black;
+            margin: 10px;
+            text-align: center;
+        }
+
+        #resposta {
+            background-color: #f1f1f1;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px;
+            font-family: monospace;
+            font-size: 14px;
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="div-quadrada">
+
+        <form onsubmit="enviarDados('https://4nlkij93xd.execute-api.us-east-1.amazonaws.com/dev/v1/tts', event)">
+            <label for="key1">Chave:</label>
+            <input type="text" id="key1" name="key" required><br><br>
+            <label for="frase1">Frase:</label>
+            <input type="text" id="frase1" name="phrase" required><br><br>
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+    <div class="div-quadrada">
+        <form onsubmit="enviarDados('https://4nlkij93xd.execute-api.us-east-1.amazonaws.com/dev/v2/tts', event)">
+            <label for="key2">Chave:</label>
+            <input type="text" id="key2" name="key" required><br><br>
+            <label for="frase2">Frase:</label>
+            <input type="text" id="frase2" name="phrase" required><br><br>
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+    <div class="div-quadrada">
+        <form onsubmit="enviarDados('https://4nlkij93xd.execute-api.us-east-1.amazonaws.com/dev/v3/tts', event)">
+            <label for="key3">Chave:</label>
+            <input type="text" id="key3" name="key" required><br><br>
+            <label for="frase3">Frase:</label>
+            <input type="text" id="frase3" name="phrase" required><br><br>
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+    <div id="resposta"></div>
+    <script>
+        function enviarDados(url, event) {
+            event.preventDefault();
+            const form = event.target;
+            const data = {
+                key: form.key.value,
+                phrase: form.phrase.value
+            };
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', url);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.onload = function () {
+                const response = JSON.parse(xhr.responseText);
+                if (xhr.status === 200) {
+                    document.getElementById("resposta").innerText = JSON.stringify(response, null, 2);
+                    console.log(xhr.responseText);
+                } else {
+                    document.getElementById("resposta").innerText = JSON.stringify(response, null, 2);
+                    console.error(xhr.responseText);
+                }
+            };
+            xhr.onerror = function () {
+                console.error('Erro de rede');
+            };
+            xhr.send(JSON.stringify(data));
+        }
+    </script>
+</body>
+
+</html>
