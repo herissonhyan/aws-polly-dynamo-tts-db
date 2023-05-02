@@ -1,10 +1,4 @@
-# Avaliação Sprint 6 - Programa de Bolsas Compass UOL / AWS e IFCE
-
-[![N|Solid](https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/LogoCompasso-positivo.png/440px-LogoCompasso-positivo.png)](https://compass.uol/pt/home/)
-
-Avaliação da sexta sprint do programa de bolsas Compass UOL para formação em machine learning para AWS.
-
-***
+# Realizar a conversão de texto para áudio utilizando *text to speech* e salvá-lo em um banco de dados.
 
 ## Sumário
 * [Objetivo](#objetivo)
@@ -358,9 +352,6 @@ def v3_tts(event, context):
     return response
 ```
 
-## Resultado
-
-A página principal pode ser consultada [aqui](https://4nlkij93xd.execute-api.us-east-1.amazonaws.com/dev/options).
 
 ## Conclusão
 
